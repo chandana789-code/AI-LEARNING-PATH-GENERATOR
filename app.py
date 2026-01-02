@@ -104,13 +104,16 @@ session_time = st.slider(
 # --------------------------------------------------
 # Rule-Based Cluster Assignment (Baseline Logic)
 # --------------------------------------------------
-def assign_cluster(progress, avg_score):
-    if progress <= 40 and avg_score <= 50:
+def assign_cluster(progress, avg_score, completed_courses):
+    if progress < 40 or avg_score < 50:
         return 0   # Beginner
-    elif progress <= 75 and avg_score <= 75:
+
+    elif progress < 75 or avg_score < 75 or completed_courses < 2:
         return 1   # Intermediate
+
     else:
         return 2   # Advanced
+   # Advanced
 
 # --------------------------------------------------
 # Generate Learning Path
