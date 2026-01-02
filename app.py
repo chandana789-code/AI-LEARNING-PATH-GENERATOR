@@ -90,12 +90,14 @@ preferred_content = st.selectbox(
 
 progress = st.slider("Learning Progress (%)", 0, 100, 30)
 average_score = st.slider("Average Assessment Score", 0, 100, 45)
+
 completed_courses = st.number_input(
     "Completed Courses",
     min_value=0,
     max_value=20,
     value=1
 )
+
 session_time = st.slider(
     "Daily Study Time (minutes)",
     0, 180, 60
@@ -113,14 +115,17 @@ def assign_cluster(progress, avg_score, completed_courses):
 
     else:
         return 2   # Advanced
-   # Advanced
 
 # --------------------------------------------------
 # Generate Learning Path
 # --------------------------------------------------
 if st.button("Generate Learning Path"):
 
-    cluster = assign_cluster(progress, average_score)
+    cluster = assign_cluster(
+        progress,
+        average_score,
+        completed_courses
+    )
 
     cluster_names = {
         0: "Beginner Learner",
@@ -138,7 +143,6 @@ if st.button("Generate Learning Path"):
             st.markdown(f"[Access Resource]({link})")
 
     st.info(
-        "This learning path is generated based on student performance, "
-        "learning behavior, and engagement level."
+        "This learning path is generated based on learner performance "
+        "and course experience, ensuring realistic personalization."
     )
-
